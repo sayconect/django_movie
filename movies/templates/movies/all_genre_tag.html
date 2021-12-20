@@ -1,0 +1,11 @@
+<div class="left-side my-4">
+    <h3 class="sear-head editContent" >Genre</h3>
+    <ul class="w3layouts-box-list">
+        {%  for genre in genres  %}
+        <li class="editContent" >
+            <input type="checkbox" class="checked" name='genre' value="{{  genre.url }}">
+            <span class="span editContent" > {{  genre.name  }}  {{  genre.url }}</span>
+        </li>
+        {%  endfor  %}
+    </ul>
+</div>

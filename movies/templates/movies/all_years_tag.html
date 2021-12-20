@@ -1,0 +1,12 @@
+<div class="left-side">
+    <h3 class="sear-head editContent" >Год</h3>
+    <ul class="w3layouts-box-list">
+        {%  for year in years  %}
+        <li class="editContent" >
+            <input type="checkbox" class="checked" name='year' value="{{  year.year  }}">
+            <span class="span editContent" >{{  year.year  }}</span>
+        </li>
+        {%  endfor  %}
+        
+    </ul>
+</div>

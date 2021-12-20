@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+{%  load static  %}
+
+<html lang="ru">
+<head>
+    <!-- //Meta tag Keywords -->
+    <title>Clack Website Template</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- //Meta tag Keywords -->
+    <!-- Custom-Files -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <!-- Bootstrap-Core-CSS -->
+    <!--/ Style-CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="all">
+    <!--// Style-CSS -->
+    <!-- font-awesome-icons -->
+    <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
+    <!-- //font-awesome-icons -->
+  <!-- /Fonts -->
+    <link href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900" rel="stylesheet">
+    <!-- //Fonts -->
+</head>
+
+<body>
+
+    <div id="page" class="page"><!-- mian-content -->
+        {%  block header  %}  HEADER  {%  endblock  %}
+        <!---->
+        <!-- banner -->
+        <section class="ab-info-main py-md-5 py-4 editContent" style="padding-left: 3rem; padding-right: 3rem;">
+            <div class="container-fluid py-md-3">
+                <div class="row">
+                    
+                        {%  block sidebar  %}  SIDEBAR  {%  endblock  %}
+                    
+                    <!-- //product left -->
+                    <!-- product right -->
+                    
+                        {%  block content  %} CONTENT {%  endblock  %}
+                        <!--<div class="grid-img-right mt-4 text-right bg bg1" >
+                            <span class="money editContent" >Flat 50% Off</span>
+                            <a href="moviesingle.html" class="btn" >Now</a>
+                        </div>-->
+                </div>
+            </div>
+        </section>
+        <!-- //contact -->
+        {%  if page_obj.has_other_pages%}
+        <div class="container pb-5">
+            <div class="row justify-content-center">
+          <ul class="pagination">
+
+            {% if page_obj.has_previous %}
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+            {%  for p in page_obj.paginator.page_range  %}
+            
+                {%  if page_obj.number == p  %}
+
+                    <li class="page-item active"><a class="page-link" href="?page={{  p  }}">{{  p  }}</a></li>
+
+                {%  elif p > page_obj.number|add:-3 and p < page_obj.number|add:3  %}
+
+                    <li class="page-item"><a class="page-link" href="?{{  search  }}page={{  p  }}">{{  p  }}</a></li>
+
+                {%  endif  %}
+
+            {%  endfor  %}
+
+            {% if page_obj.has_next %}
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a>
+            {% endif %}
+            
+          </ul>
+        </div>
+        </div>
+        {%  endif  %}
+        <!-- footer -->
+        {%  block footer  %}  FOOTER  {%  endblock  %}
+        <!-- //footer -->
+            </div>
+</body>
+</html>

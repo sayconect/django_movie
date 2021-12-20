@@ -1,0 +1,70 @@
+{% extends 'base.html'  %}
+
+{% block header  %}
+<div class="main-banner bg" id="home" >
+{%  include 'inc/_header.html'  %}
+</div>
+<ol class="breadcrumb editContent">
+    <li class="breadcrumb-item">
+        <a href="index.html" class="editContent">Home</a>
+    </li>
+    <li class="breadcrumb-item active editContent">Single Page</li>
+</ol>
+{% endblock  %} 
+
+{%  block  sidebar  %}
+<div class="side-bar col-lg-4">
+{%  include 'inc/_sidebar.html'  %}
+</div>
+{%  endblock  %}
+
+
+{%  block  content  %}
+<div class="left-ads-display col-lg-8">
+<div class="left-ads-display col-lg-8">
+    <div class="row">
+        <div class="desc1-left col-md-6">
+            <img src="{{  actor.image.url  }}" class="img-fluid" alt="">
+        </div>
+        <div class="desc1-right col-md-6 pl-lg-4">
+            <h3 class="editContent" style="outline: none; cursor: inherit;">
+                {{ actor.name  }}</h3>
+            <h5 class="editContent">{{  actor.name }}</h5>
+            <ul>
+                <li style="list-style: none"><span><b>Age: </b>{{ actor.age }}</span></li>
+
+                
+                <li style="list-style: none">
+                    <span><b>Actor: </b>
+                    {%  for movie_actor in actor.movie_actor.all  %}
+                    <a href="{{  movie_actor.get_absolute_url  }}">{{  movie_actor.title  }}</a>
+                    {%  endfor  %}
+                    </span>
+                </li>
+            
+
+               
+                <li style="list-style: none">
+                    <span><b>Director: </b>
+                        {%  for movie_direc in actor.movie_director.all %}
+                        <a href="{{  movie_direct.get_absolute_url  }}">{{  movie_direc.title  }}</a>
+                        {%  endfor  %} 
+                    </span>
+                </li>
+                
+                
+               
+            <!--  //contact form grid ends here -->
+        </div>
+        <p class="mt-3 editContent" style="outline: none; cursor: inherit;">
+            {{ actor.description|safe  }}
+         </p>
+    </div>
+</div>
+{%  endblock  %}
+
+
+
+{%  block  footer  %}
+{%  include 'inc/_footer.html'  %}
+{%  endblock  %}
