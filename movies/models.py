@@ -8,17 +8,18 @@ class Category(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     url = models.SlugField(max_length=160, unique=True)
-
+    
+     class Meta:
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+   
     def __str__(self) -> str:
         return self.name
     
     def get_absolute_url(self):
         return reverse('category', kwargs={'categ_slug':self.url})
 
-    class Meta:
-        verbose_name = 'Category'
-        verbose_name_plural = 'Categories'
-    
+   
     
 
 class ActorAndDirector(models.Model):
@@ -27,29 +28,30 @@ class ActorAndDirector(models.Model):
     description = models.TextField()
     image = models.ImageField(upload_to='actors/')
 
-
+    class Meta:
+        verbose_name = 'Actors and Directors'
+        verbose_name_plural = 'Actors and Directors'
+        
     def __str__(self):
         return self.name
     
     def get_absolute_url(self):
         return reverse('actor', kwargs={'slug':self.name})
     
-    class Meta:
-        verbose_name = 'Actors and Directors'
-        verbose_name_plural = 'Actors and Directors'
 
 
 class Genere(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     url = models.SlugField(unique=True)
-
-    def __str__(self):
-        return self.name
     
     class Meta:
         verbose_name = 'Genere'
         verbose_name_plural = 'Generes'
+        
+    def __str__(self):
+        return self.name
+    
 
 
 class Movie(models.Model):
@@ -70,15 +72,17 @@ class Movie(models.Model):
     url = models.SlugField(unique=True, max_length=150)
     draft = models.BooleanField(default=False)
 
+    class Meta:
+        verbose_name = 'Movie'
+        verbose_name_plural = "Movies"
+        
     def __str__(self):
         return self.title
     
     def get_absolute_url(self):
         return reverse('movie', kwargs={'slug':self.url})
 
-    class Meta:
-        verbose_name = 'Movie'
-        verbose_name_plural = "Movies"
+    
 
 class MovieShot(models.Model):
     title = models.CharField(max_length=100)
@@ -86,34 +90,40 @@ class MovieShot(models.Model):
     image = models.ImageField(upload_to='movie_shot/')
     movie = models.ForeignKey(Movie, on_delete= models.CASCADE, blank=True, default=None)
 
-    def __str__(self):
-        return self.title
-
     class Meta:
         verbose_name = 'Movie shot'
         verbose_name_plural = 'Movie shots'
+        
+    def __str__(self):
+        return self.title
+
+    
 
 class RaitingStar(models.Model):
     value = models.PositiveSmallIntegerField(default=0)
 
+     class Meta:
+        verbose_name = 'Raiting star'
+        verbose_name_plural = 'Raiting stars'
+        
     def __str__(self):
         return str(self.value)
 
-    class Meta:
-        verbose_name = 'Raiting star'
-        verbose_name_plural = 'Raiting stars'
+   
 
 class Raiting(models.Model):
     ip = models.CharField(max_length=15, verbose_name='Ip adress')
     star = models.ForeignKey(RaitingStar, on_delete=models.CASCADE, verbose_name='star')
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, verbose_name='movie')
 
+   class Meta:
+        verbose_name = 'Raiting'
+        verbose_name_plural = 'Raiting'
+        
     def __str__(self):
         return f'{self.star} - {self.movie}'
 
-    class Meta:
-        verbose_name = 'Raiting'
-        verbose_name_plural = 'Raiting'
+    
 
 class Review(models.Model):
     email = models.EmailField()
@@ -122,9 +132,11 @@ class Review(models.Model):
     parent = models.ForeignKey('self',on_delete=models.SET_NULL, blank=True, null=True)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
 
+   class Meta:
+        verbose_name = 'Review'
+        verbose_name_plural = 'Reviews'
+        
     def __str__(self):
         return f'{self.name} - {self.movie}'
 
-    class Meta:
-        verbose_name = 'Review'
-        verbose_name_plural = 'Reviews'
+    
