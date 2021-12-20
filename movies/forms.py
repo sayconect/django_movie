@@ -11,7 +11,6 @@ class ReviewModelForm(forms.ModelForm):
         super().save(commit=commit)
 
 
-# Не використовується, там шось треба робити в js і я  покішо хз як це зробити
 class RatingForm(forms.ModelForm):
     star = forms.ModelChoiceField(queryset=RaitingStar.objects.all(), widget=forms.RadioSelect(), empty_label='star')
     class Meta:
