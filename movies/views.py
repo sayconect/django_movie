@@ -37,10 +37,6 @@ class MovieListByFilter(ListView):
 
 
     def get_queryset(self):
-        a = self.request.GET.copy()
-        
-        print(list(a.lists()))
-        print(self.request.GET.getlist('year'))
         if self.request.GET.get('year') and self.request.GET.get('genre'):
             movies= Movie.objects.filter(year__in=self.request.GET.getlist('year'),
                                         genre__url__in=self.request.GET.getlist('genre'))
@@ -63,8 +59,7 @@ class MoviesBySearch(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['search'] = f"search={self.request.GET.get('search')}&" # це ми робмо для тогог щоб у випадку якщо результат займає дві сторірки при переході на наступну параметре search не пропадав
-        return context
+        context['search'] = f"search={self.request.GET.get('search')}&"
 
 
 class SingleMovie(DetailView):
